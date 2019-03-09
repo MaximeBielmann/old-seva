@@ -1,0 +1,143 @@
+<% content_for :meta_title, "#{@sneakers.brand} - #{@sneakers.title} #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, "#{@sneakers.brand} - #{@sneakers.title}" %>
+<% content_for :meta_image, @sneakers.img_url %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 text-left title">
+      <h6><%= @sneakers.brand %></h6>
+      <h5><%= @sneakers.title %></h5>
+      <p><%= @sneakers.sneakers_ref %></p>
+    </div>
+    <div class="col-md-8">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 border-right">
+      <div class="row">
+        <div class="col-md-12">
+          <% if @sneakers.img_url %>
+					<%= image_tag (@sneakers.img_url), class:'img-fluid' %>
+					<% else %>
+          <%= image_tag("noimage.png", class:'img-fluid') %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <% if @sneakers.img_url2 %>
+          <%= image_tag @sneakers.img_url2, class:'img-fluid' %>
+          
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <% if @sneakers.img_url3 %>
+          <%= image_tag @sneakers.img_url3, class:'img-fluid' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div id="cvtxadepxigkhv"><div class="adBanner">.</div></div>
+      <script> 
+      document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){document.getElementById("cvtxadepxigkhv").offsetHeight?document.getElementById("cvtxadepxigkhv").style.display="none":document.getElementById("cvtxadepxigkhv").innerHTML='<iframe style="border: none;width: 600px;height: 300px;overflow: hidden;" src="https://res.cloudinary.com/hqfexni0y/image/upload/v1549221920/error/adblock-image.png" width="600" height="300" scrolling="no"></iframe>'},1e3)});
+      </script>
+      <div class="row">
+        <div class="col-md-8">
+          <h3><% if @sellers.size > 1 %> Disponible dans <%= @sellers.size %> shops <% elsif @sellers.size == 1 %>Disponible dans <%= @sellers.size %> shop <% else %> Aucun stock disponible actuellement<% end %></h3>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>  
+          <% @sellers.each do |seller| %>
+          <% @i = 0 %>
+            <div class="row">
+                 <div class="col-md-6 m-t-20">
+                  <h5><%= image_tag seller.logo_url, size: '65', class:'img-fluid' %> <%= seller.vendor %></h5>
+                 </div>
+                 <div class="col-md-6 m-t-35">
+                  <% seller.stocks.each do |s| %>
+                    <% if @i<1  %>
+                    <h5><% if s.old_price > s.price %><del><%= s.old_price %>€</del>  <%= s.price %>€ <% else %> <%= s.price %>€ <% end %><a href="<%= s.offer_link %>" class="btn btn-primary btn-xs btn-seva " target="_blank" role="button" aria-pressed="true">Voir l'offre</a></h5>
+                    <% @i += 1 %>
+                    <% end %>
+                  <% end %>
+                 </div>
+            </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul class="list-inline">
+                    <% seller.stocks.each do |s| %>
+                        <li class="list-inline-item m-l-20"><p><%= s.size %></p></li>
+                    <% end %>
+                </ul>
+                  </div>
+                </div>
+          <% end %>
+          <% else %>
+          <div class="row">
+            <div class="col-md-12">
+              <% if @releases.size > 0 %>
+              <h3>Releases</h3>
+              <% end %>
+            </div>
+          </div>
+      <div class="col-md-12">
+          <% @releases.each do |release| %>
+            <div class="row"> 
+                 <div class="col-md-4">
+                  <h5><%= image_tag release.seller.logo_url, size: '65', class:'img-fluid' %> <%= release.seller.vendor %></h5>
+                 </div>
+                 <div class="col-md-4">
+                  <h5><%= release.release_date.strftime("Le %d %b %Y à %H:%M") %></h5>
+                 </div>
+                 <div class="col-md-2">
+                    <h5><%= release.release_price %>€</h5>
+                 </div>
+                 <div class="col-md-2">
+                    <h5><a href="<%= release.release_link %>" class="btn btn-primary btn-xs btn-seva " target="_blank" role="button" aria-pressed="true">Voir l'offre</a></h5>
+                 </div>
+            </div>
+                    <% if @current_admin %>
+                      <%= form_tag "/calendar/#{release.id}", method: "delete" do %>
+                        <input type="submit" value="supprimer" />
+                      <% end %>
+                    <% end %>
+          <% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<% if @current_admin %>
+
+<div class="container m-t-200">    
+
+<h1>Modifier la sneaker</h1>
+
+<div class="row">
+    <%= form_tag "/sneakers/#{@sneakers.id}", method: "patch" do %>
+  <p><input type="text" value="<%= @sneakers.sneakers_ref %>" name="sneakers_ref" /></p> 
+  <p><input type="text" value="<%= @sneakers.brand %>" name="brand" /></p>
+  <p><input type="text" value="<%= @sneakers.title %>"  name="title" /></p>
+  <p><input type="text" value="<%= @sneakers.color %>"  name="color" /></p>
+  <p><input type="text" value="<%= @sneakers.img_url %>"  name="img_url" /></p>
+  <p><input type="text" value="<%= @sneakers.img_url2 %>"  name="img_url2" /></p>
+  <p><input type="text" value="<%= @sneakers.img_url3 %>"  name="img_url3" /></p>
+  <p><input type="submit" value="Mettre à jour la sneaker" /></p>
+<% end %>
+</div>
+
+<div class="row">
+<%= form_tag "/sneakers/#{@sneakers.id}", method: "delete" do %>
+  <input type="submit" value="Supprimer la sneaker" />
+<% end %>
+</div>
+
+<div class="row">
+<p><a href="/sneakers">Retourner à l’index</a></p>
+</div>
+
+</div>
+
+<% end %>

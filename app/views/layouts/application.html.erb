@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= meta_title %></title>
+    
+	<meta name="description" content="<%= meta_description %>">
+	
+	<!-- Facebook Open Graph data -->
+	<meta property="og:title" content="<%= meta_title %>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="<%= request.original_url %>" />
+	<meta property="og:image" content="<%= meta_image %>" />
+	<meta property="og:description" content="<%= meta_description %>" />
+	<meta property="og:site_name" content="<%= meta_title %>" />
+	
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="<%= DEFAULT_META["twitter_account"] %>">
+	<meta name="twitter:title" content="<%= meta_title %>">
+	<meta name="twitter:description" content="<%= meta_description %>">
+	<meta name="twitter:creator" content="<%= DEFAULT_META["twitter_account"] %>">
+	<meta name="twitter:image" content="<%= meta_image %>">
+	
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <%= stylesheet_link_tag href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" %>
+    
+    <%= favicon_link_tag asset_path('favicon-2.ico') %>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    
+    
+  </head>
+    
+    <!-- Header -->
+	<header class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			<div class="topbar">
+				<div class="topbar-social">
+					<a href="https://www.facebook.com/seva.bzh/" target="_blank" class="topbar-social-item fab fa-facebook"></a>
+					<a href="https://www.instagram.com/seva.bzh/" target="_blank" class="topbar-social-item fab fa-instagram"></a>
+					<a href="https://twitter.com/seva_bzh" target="_blank" class="topbar-social-item fab fa-twitter"></a>
+					<a href="https://www.youtube.com/channel/UCnmFFggxadFfYhLNNOhXCPw" target="_blank" class="topbar-social-item fab fa-youtube"></a>
+				</div>
+
+				<span class="topbar-child1">
+					Économisez jusqu'à 50% sur l'achat de vos sneakers
+				</span>
+
+				<div class="topbar-child2">
+					<span class="topbar-email">
+						contact@seva.bzh
+					</span>
+				</div>
+			</div>
+
+			<div class="wrap_header">
+				<!-- Logo -->
+				<a href="/" class="logo">
+					<%= image_tag "logo.png" %>
+				</a>
+
+				<!-- Menu -->
+				
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+							  <%= link_to "Home", '/' %>
+							</li>
+							
+							<li>
+								<%= link_to "Sneakers", '/sneakers' %>
+							</li>
+							
+							<li>
+							  <%= link_to "Boutiques", '/sellers' %>
+							</li>
+							
+							<li>
+							  <%= link_to "Coming Soon", '/calendar' %>
+							</li>
+							
+							<!-- <li>
+							  <%#= link_to "Blog", '/blog' %>
+							</li> -->
+							
+							<li>
+								<%= link_to "Contact", '/contact-me' %>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+		<!-- DEBUT DU TEST -->
+		
+			<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="/" class="logo-mobile">
+				<%= image_tag "logo.png" %>
+			</a>
+			<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+							  <%= link_to "Home", '/' %>
+							</li>
+
+							<li>
+								<%= link_to "Sneakers", '/sneakers' %>
+							</li>
+							
+							<li>
+							  <%= link_to "Boutiques", '/sellers' %>
+							</li>
+							
+							<li>
+							  <%= link_to "Coming Soon", '/calendar' %>
+							</li>
+							
+							<!-- <li>
+							  <%#= link_to "Blog", '/blog' %>
+							</li> -->
+
+							<li>
+								<%= link_to "Contact", '/contact-me' %>
+							</li>
+						</ul>
+					</nav>
+				</div>
+		</div>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-31618814-5"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+			
+			  gtag('config', 'UA-31618814-5');
+			</script>
+							
+		  </header>
+  
+  <body>
+  	 <!-- Load Facebook SDK for JavaScript -->
+		<div id="fb-root"></div>
+		<script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      xfbml            : true,
+		      version          : 'v3.2'
+		    });
+		  };
+		
+		  (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		
+		<!-- Your customer chat code -->
+		<div class="fb-customerchat"
+		  attribution=setup_tool
+		  page_id="983389791795280"
+		  theme_color="#f3d1bb"
+		  logged_in_greeting="Hello ! Vous avez besoin d’aide ?"
+		  logged_out_greeting="Hello ! Vous avez besoin d’aide ?">
+		</div>
+		
+  	<div><%= flash[:info] %></div>
+    <%= yield %>
+  </body>
+  
+  	<!-- Footer -->
+	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+		<div class="flex-w p-b-90 justify-content-center">
+			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3 justify-content-center">
+				<h4 class="p-b-30 text-center">
+					GET IN TOUCH
+				</h4>
+
+				<div>
+					<p class="text-center">
+						Des questions ? Faites le nous savoir, promis on mord pas.
+					</p>
+
+					<div class="flex-m p-t-30 justify-content-center">
+						<a href="https://www.facebook.com/seva.bzh/" target="_blank" class="color1 p-r-20 fab fa-facebook"></a>
+						<a href="https://www.instagram.com/seva.bzh/" target="_blank" class="color1 p-r-20 fab fa-instagram"></a>
+						<a href="https://twitter.com/seva_bzh" target="_blank" class="fcolor1 p-r-20 fab fa-twitter"></a>
+						<a href="https://www.youtube.com/channel/UCnmFFggxadFfYhLNNOhXCPw" target="_blank" class="color1 p-r-20 fab fa-youtube"></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4 justify-content-center">
+				<h4 class="p-b-30 text-center">
+					MENU
+				</h4>
+
+				<ul>
+							<li class="p-b-9 text-center">
+							  <%= link_to "Home", '/' %>
+							</li>
+
+							<li class="p-b-9 text-center">
+								<%= link_to "Sneakers", '/sneakers' %>
+							</li>
+							
+							<li class="p-b-9 text-center">
+							  <%= link_to "Boutiques", '/sellers' %>
+							</li>
+							
+							<li class="p-b-9 text-center">
+							  <%= link_to "Coming Soon", '/calendar' %>
+							</li>
+							
+							<!-- <li class="p-b-9 text-center">
+							  <%#= link_to "Blog", '/blog' %>
+							</li> -->
+
+							<li class="p-b-9 text-center">
+								<%= link_to "Contact", '/contact-me' %>
+							</li>
+				</ul>
+			</div>
+
+			
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="p-b-30 text-center">
+					HELP
+				</h4>
+
+				<ul>
+							<li class="p-b-9 text-center">
+							  <%= link_to "Espace presse", '/presskit' %>
+							</li>
+							
+							<li class="p-b-9 text-center">
+								<%= link_to "Contact", '/contact-me' %>
+							</li>
+
+							<li class="p-b-9 text-center">
+								<%= link_to "FAQs", '/faq' %>
+							</li>
+
+							<li class="p-b-9 text-center">
+								<%= link_to "Partenariat", '/contact-me' %>
+							</li>
+							
+							<li class="p-b-9 text-center">
+							  <%= link_to "Report a bug", '/contact-me' %>
+							</li>
+				</ul>
+			</div>
+
+			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+				<h4 class="p-b-30 text-center">
+					NEWSLETTER
+				</h4>
+
+				<!-- Begin Mailchimp Signup Form -->
+			<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+			<style type="text/css">
+			    #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; }
+			    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+			       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+			</style>
+			<div id="mc_embed_signup">
+			<form action="https://bzh.us7.list-manage.com/subscribe/post?u=0fd662f29411248b0b9f0ad9a&amp;id=a758e926ae" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+			   <div id="mc_embed_signup_scroll">
+			    <p class="text-center">Inscrivez-vous pour ne rien rater de l'actualité sneakers</p>
+			    <input type="email" value="" name="EMAIL" class="email w-100" id="mce-EMAIL" placeholder="adresse email" required>
+			   <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+			   <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0fd662f29411248b0b9f0ad9a_a758e926ae" tabindex="-1" value=""></div>
+			   <div class="clear"><input type="submit" value="S'inscrire" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary w-100 btn-seva"></div>
+			   </div>
+			</form>
+			</div>
+
+				<!--End mc_embed_signup-->
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 text-center">
+				<p>Copyright © 2018 Seva. | Website by <a href="https://maximebielmann.fr" target="_blank">Maxime</a></p>
+			</div>
+			<div class="col-md-6 text-center">
+				<p><a href="/mentions" target="_blank">Mentions légales</a> | <a href="/cgu" target="_blank">CGU</a></a></p>
+			</div>
+		</div>
+	</footer>
+</html>

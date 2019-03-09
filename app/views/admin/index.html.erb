@@ -1,0 +1,200 @@
+<% if @current_admin %>
+ <a href="/admin/logout">Se déconnecter</a>
+<% end %>
+
+<p><%= @link %></p>
+
+<% if @current_admin %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>ICI C'EST L'ADMIN</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+            <div class="col-md-6">
+            <h3>Ajouter une sneaker</h3>
+            <%= form_tag "/sneakers", method: "post" do %>
+                <form>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" label="sneakers_ref" placeholder="Référence" name="sneakers_ref" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Marque" name="brand" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Modèle" name="title" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Couleur" name="color" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Url de l'image" name="img_url" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Ajouter la sneaker</button>
+                </form>
+            <% end %>
+            </div>
+          <div class="col-md-6">
+    <h3>Ajouter une boutique</h3>
+         <%= form_tag "/sellers", method: "post" do %>
+                <form>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Url logo" name="logo_url" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Nom de la boutique" name="vendor" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Pays" name="country" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Lien vers le shop" name="shop_link" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Coût d'envoi" name="shipping_cost" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Délai de d'envoi" name="shipping_time" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Moyen de paiement" name="payment" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text-area" class="form-control border" placeholder="Description" name="description" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Ajouter la boutique</button>
+                </form>
+            <% end %>
+        </div>
+      </div>
+      <div class="row m-t-50">
+            <div class="col-md-6">
+            <h3>Ajouter une release</h3>
+            <%= form_tag "/calendar", method: "post" do %>
+                <form>
+                  <div class="form-group">
+                    <select name="sneaker_id" class="form-control border">
+                    <% @sneakers.each do |sneaker| %>
+                    <option value="<%= sneaker.id %>"><%= sneaker.sneakers_ref %> - <%= sneaker.brand %> - <%= sneaker.title %></option>
+                    <% end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select name="seller_id" class="form-control border">
+                    <% @sellers.each do |seller| %>
+                    <option value="<%= seller.id %>"><%= seller.vendor %> - <%= seller.country %></option>
+                    <% end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="datetime-local" class="form-control border" name="release_date" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Lien de l'offre" name="release_link" />
+                  </div>
+                  <div class="form-group">
+                    <input type="number" step="0.01" class="form-control border" placeholder="Prix" name="release_price" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Ajouter au calendrier</button>
+                </form>
+            <% end %>
+            </div>
+            <div class="col-md-6">
+    <h3>Ajouter un stock</h3>
+         <%= form_tag "/stocks", method: "post" do %>
+                <form>
+                  <div class="form-group">
+                    <select name="sneaker_id" class="form-control border">
+                    <% @sneakers.each do |sneaker| %>
+                    <option value="<%= sneaker.id %>"><%= sneaker.sneakers_ref %> - <%= sneaker.brand %> - <%= sneaker.title %></option>
+                    <% end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select name="seller_id" class="form-control border">
+                    <% @sellers.each do |seller| %>
+                    <option value="<%= seller.id %>"><%= seller.vendor %> - <%= seller.country %></option>
+                    <% end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Taille" name="size" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Lien vers l'offre" name="offer_link" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Coût d'envoi" name="shipping_cost" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Vieux prix" name="old_prix" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border" placeholder="Nouveau prix" name="price" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Ajouter le stock</button>
+                </form>
+            <% end %>
+        </div>
+      </div>
+</div>
+
+<div class="container m-t-50">
+    <div class="row">
+        
+    </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <div class="col-md-12">
+      <h1>PAS TOUCHER A CES BOUTONS</h1>
+    </div>
+    <div class="col-md-4">
+        <%= form_tag '/listing_uploader/sneakers', method: 'post' do %>
+           <button type="submit" class="btn btn-primary">Upload les sneakers</button>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <%= form_tag '/listing_uploader/sellers', method: 'post' do %>
+           <button type="submit" class="btn btn-primary">Upload les shops</button>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <%= form_tag '/listing_uploader/stocks', method: 'post' do %>
+           <button type="submit" class="btn btn-primary">Upload les stocks</button>
+        <% end %>
+    </div>
+    </div>
+    <div class="col-md-6">
+    <div class="col-md-12">
+      <h1>PAS TOUCHER A CES BOUTONS LA NON PLUS</h1>
+    </div>
+    <div class="col-md-4">
+        <%= form_tag '/listing_uploader/sneakers', method: 'delete' do %>
+           <button type="submit" class="btn btn-primary">Supprimer les <%= @sneakersize %> sneakers</button>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <%= form_tag '/listing_uploader/sellers', method: 'delete' do %>
+           <button type="submit" class="btn btn-primary">Supprimer les <%= @sellersize %> shops</button>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <%= form_tag '/listing_uploader/stocks', method: 'delete' do %>
+           <button type="submit" class="btn btn-primary">Supprimer les <%= @stocksize %> stocks</button>
+        <% end %>
+    </div>
+  </div>
+    </div>
+</div>
+
+<% else %>
+  <h1>Bienvenue visiteur anonyme !</h1>
+  <a href="/admin/login">S'identifier</a>
+<% end %>
